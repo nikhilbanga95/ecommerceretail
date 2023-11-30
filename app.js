@@ -17,7 +17,6 @@ const morgan = require('morgan');
 const User = require('./models/user');
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.3qha20b.mongodb.net/${process.env.MONGO_DB_FOLDER_NAME}`;
-
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
@@ -127,8 +126,8 @@ mongoose
     //   key: privateKey,
     //   cert: certificate
     // }, app).listen(process.env.PORT || 3030);
-    app.listen(process.env.PORT || 3030);
-    console.log('U r Connected on 3030')
+    app.listen(process.env.PORT || 3333);
+    console.log('U r Connected on 3333')
   })
   .catch(err => {
     console.error(err)
