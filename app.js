@@ -16,7 +16,7 @@ const morgan = require('morgan');
 
 const User = require('./models/user');
 
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.3qha20b.mongodb.net/${process.env.MONGO_DB_FOLDER_NAME}`;
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER || "practice-ejs"}:${process.env.MONGO_PASSWORD || "mongodbpassword"}@cluster0.3qha20b.mongodb.net/${process.env.MONGO_DB_FOLDER_NAME || "shop"}`;
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
