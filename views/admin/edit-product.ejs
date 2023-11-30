@@ -1,0 +1,88 @@
+<%- include('../includes/head.ejs') %>
+  <script src="../../bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <link rel="stylesheet" href="../../css/main.css">
+  </head>
+
+  <%- include('../includes/navigation.ejs') %>
+
+    <form action="/admin/<% if(!!editing || hasError){%>edit-product<%}else{%>add-product<%}%>" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+       
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <% if(!!editing || !!hasError){%>
+        <input type="hidden" name="productId" value="<%=product._id%>" />
+      <%}%>
+      <div class="row g-3">
+        <div class="col-sm">
+          <div class="form-outline d-flex flex-column">
+            <input type="text" name="title" id="title" class="order-2 form-control" value="<%if(!!editing || !!hasError){%><%= product.title %><% } %>" required />
+            <div class="d-flex justify-content-between order-1">
+              <label class="m-0" for="title">Title : </label>
+              <div class="invalid-feedback mt-0 w-auto">
+                Please choose a title.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-outline">
+            <label class="m-0" for="price">Price : </label>
+            <input type="number" name="price" id="price" class="form-control" step="0.01" value="<%if(!!editing || hasError){%><%= product.price %><% } %>" />
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <!-- <div class="form-outline d-flex flex-column">
+            <input type="text" name="imageUrl" id="imageUrl" class="order-2 form-control" required value="<%if(!!editing || !!hasError){%><%= product.imageUrl %><% } %>" />
+            <div class="d-flex justify-content-between order-1">
+              <label class="m-0" for="imageUrl">Image URL : </label>
+              <div class="invalid-feedback mt-0 w-auto">
+                Please choose a URL.
+              </div>
+            </div>
+          </div> -->
+          <div class="form-outline d-flex flex-column">
+            <input type="file" name="image" id="image" class="order-2 form-control" required />
+            <div class="d-flex justify-content-between order-1">
+              <label class="m-0" for="imageUrl">Image : </label>
+              <div class="invalid-feedback mt-0 w-auto">
+                Please choose a URL.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="description">Product Description</label>
+            <textarea class="form-control" name="description" id="description" rows="3"><%if(!!editing || !!hasError){%><%= product.description %><% } %></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-secondary mt-3 px-5"><% if(!!editing || !!hasError){%>Edit Product<%}else{%>Add Product<%}%></button>
+        <% if(errorMessage){ %>
+          <div class="text-danger mt-0 w-auto">
+            <%= errorMessage %>
+          </div>
+        <% } %>
+      </div>
+    </form>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+    <%- include('../includes/end.ejs') %>

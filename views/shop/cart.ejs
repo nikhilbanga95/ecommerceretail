@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+  <script src="../bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+
+<% if(!!products.length) { %>
+  <ul class="list-group">
+    <% products.forEach(p=>{ %>
+      <li class="list-group-item d-flex justify-content-between align-items-end mb-2">
+        <div>
+          <h1>
+            <%= p.productId.title %>
+          </h1>
+          <h1>Qty : <span class=""><%= p.quantity %></span></h1>
+        </div>
+        <form action="/cart-delete-item" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> 
+          <input type="hidden" name="productId" value="<%= p.productId._id %>" />
+          <button type="submit" class="btn btn-link text-danger">Delete</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+  <hr />
+  <!-- <form class="" action="/create-order" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" /> 
+    <button class="btn btn-success" type="submit">Checkout</button>
+  </form> -->
+  <a class="btn btn-success" href="/checkout">Checkout</a>
+<% } else { %>
+  <h1>No Products in the Cart</h1>
+<% } %>
+
+<%- include('../includes/end.ejs') %>

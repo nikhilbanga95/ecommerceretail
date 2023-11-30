@@ -1,0 +1,18 @@
+@import url('./over-rides.css');
+@import url('../../bootstrap/css/bootstrap.min.css');
+
+
+.was-validated .form-control:valid {
+  border-color: none;
+  background-image: none;
+}
+
+.was-validated :invalid~div>.invalid-feedback {
+  display: block;
+}
+
+@media (min-width: 576px) {
+  .h-100-sm {
+    height: 100%;
+  }
+}

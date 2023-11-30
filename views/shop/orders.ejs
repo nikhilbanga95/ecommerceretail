@@ -1,0 +1,37 @@
+<%- include('../includes/head.ejs') %>
+  <script src="../bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+
+<h1>Orders Page</h1>
+<section>
+  <% if (!orders.length) {%> 
+    <h1>No Orders</h1>
+  <% } else { %> 
+    <ul class="list-group">
+      <% orders.forEach(order=>{ %>
+          <li class="list-group-item mb-2">
+            <div>
+              <div class="d-flex justify-content-between align-items-center">
+                <h1 class="mb-0">ID: #<%= order._id %></h1>
+                <a class="btn btn-link" href="/orders/<%= order._id %>">Invoice</a>
+              </div>
+              <ul class="list-group">
+                <% order.products.forEach(item=>{ %>
+                  <li class="list-group-item mb-2">
+                    <div>
+                      <h1  class="d-flex justify-content-between"><%= item.product.title %> <span class=""><%= item.quantity %></span></h1>
+                    </div>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+          </li>
+        <% }) %>
+    </ul>
+  <% } %>
+</section>
+
+<%- include('../includes/end.ejs') %>

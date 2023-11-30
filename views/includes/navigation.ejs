@@ -1,0 +1,68 @@
+<body>
+
+  <header class="position-sticky top-0 start-0 w-100" style="z-index: 100;">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">eCommerce Retail</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+          aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+          aria-labelledby="offcanvasDarkNavbarLabel" data-bs-scroll="true">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">eCommerce Retail</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <form class="d-flex flex-grow-1 mx-xl-5" role="search">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav justify-content-end pe-3">
+              <li class="nav-item">
+                <a class="nav-link <%= path==='' ? 'active' : '' %>" aria-current="page" href="/">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <%= path==='/products' ? 'active' : '' %>" aria-current="page"
+                  href="/products">Products</a>
+              </li>
+              <% if(isAuthenticated){ %>
+                <li class="nav-item">
+                  <a class="nav-link <%= path==='/cart' ? 'active' : '' %>" aria-current="page" href="/cart">Your Cart</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link <%= path === 'admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Account
+                  </a>
+                  <ul class="end-0 p-0 dropdown-menu dropdown-menu-dark" style="left: auto;">
+                    <li><a class="dropdown-item <%= path === 'admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products</a></li>
+                    <li><a class="dropdown-item <%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a></li>
+                    <li>
+                      <form action="/logout" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                        <button type="submit" class="dropdown-item">Logout</button>
+                      </form>
+                    </li>
+                  </ul>
+                  <!-- <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                </li>
+              <% } else { %>
+                <li class="nav-item"><a class="nav-link <%= path === '/login' ? 'active' : '' %>" href="/login">Login</a></li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section class="container-md py-5">

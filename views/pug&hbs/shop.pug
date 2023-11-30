@@ -1,0 +1,18 @@
+extends layouts/main-layout.pug 
+
+block styles 
+  link(rel="stylesheet", href="css/main.css")
+
+block content
+  if products.length > 0
+    div.row
+      each item in products
+        div.col-xl-3.col-lg-4.col-sm-6.col-12
+          div.card.w-100.my-3
+            img.card-img-top( src="https://media.istockphoto.com/id/1312330538/photo/cryptocurrency.jpg?s=612x612&w=0&k=20&c=Nebi6e6Ke8aMXe1Ry6K-a0vETlEGRLayHNyYUrct6qk=" alt="")
+            div.card-body
+              h5.card-title #{item.title}
+              p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+              button.btn.btn-primary Add to Cart
+  else 
+    h1 No Products

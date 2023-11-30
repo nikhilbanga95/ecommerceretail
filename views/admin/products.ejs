@@ -1,0 +1,46 @@
+<%- include('../includes/head.ejs') %>
+<script src="../../bootstrap/js/bootstrap.bundle.min.js" defer></script>
+<script src="../js/admin.js" defer></script>
+<link rel="stylesheet" href="../css/main.css">
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+
+  <% if (products.length> 0 ) { %>
+    <div class="row">
+      <% for(let product of products) { %>
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-3" id="product-<%=product._id%>">
+          <div class="h-100-sm card w-100">
+            <div style="height: 57%;">
+              <img src='/<%= product.imageUrl %>' class="card-img-top mh-100" alt="">
+            </div>
+            <div class="card-body flex-column d-flex justify-content-between">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title">
+                    <%= product.title %>
+                  </h5>
+                  <span>
+                    <%= product.price %> INR
+                  </span>
+                </div>
+                <p class="mb-1 card-text">
+                  <%= product.description %>
+                </p>
+              </div>
+              <div class="d-flex justify-content-around" id="edit-delete">
+                <a href="/admin/edit-product/<%= product._id%>?edit=true" class="btn btn-warning">Edit</a>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <input type="hidden" value="<%= product._id%>" name="productId" />
+                <button onclick="deleteProduct(this)" class="btn btn-danger" type="button">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  <% } else { %>
+    <h1>No products found</h1>
+  <% } %>
+
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,8 @@
+{
+  "env": {
+    "MONGO_USER":"practice-ejs",
+    "MONGO_PASSWORD":"mongodbpassword",
+    "MONGO_DB_FOLDER_NAME":"shop",
+    "STRIPE_KEY":"sk_test_51O3MURSHATdsPLfrw0PuXgSFbyxsFyvrgmXkKMpG7JP9ktHzGvKGEubIquQudxk5VzpvcoeCzU1GtYKvrEz6tzuq00k1dAs8oW"
+  }
+}

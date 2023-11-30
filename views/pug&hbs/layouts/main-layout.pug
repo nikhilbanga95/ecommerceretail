@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="icon", href="data:")
+    title #{docTitle}
+    block styles
+    script(src="../bootstrap/js/bootstrap.bundle.min.js", defer) 
+
+  body 
+    header.position-sticky.top-0.start-0.w-100(style='z-index:1000;') 
+      nav.navbar.navbar-dark.navbar-expand-lg.bg-dark
+        div.container-fluid
+          a.navbar-brand(href='#') Practice Pug Template
+
+          button.navbar-toggler( type="button", data-bs-toggle="offcanvas", data-bs-target="#offcanvasDarkNavbar",
+          aria-controls="offcanvasDarkNavbar", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+          div.offcanvas.offcanvas-end.text-bg-dark( tabindex="-1", aria-labelledby="offcanvasDarkNavbarLabel", data-bs-scroll="true")#offcanvasDarkNavbar
+            div.offcanvas-header
+              h5.offcanvas-title#offcanvasDarkNavbarLabel Dark offcanvas
+              button.btn-close.btn-close-white(type="button", data-bs-dismiss="offcanvas", aria-label="Close")
+
+            div.offcanvas-body
+              ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
+                li.nav-item
+                  a.nav-link(aria-current="page", href="/", class=(path==='/' ? 'active' : '')) Shop
+                li.nav-item
+                  a.nav-link(href="/admin/add-product", class=(path==='admin/add-product' ? 'active' : '')) Add Product
+                li.nav-item.dropdown
+                  a.nav-link.dropdown-toggle(href="#", role="button", data-bs-toggle="dropdown",
+                  aria-expanded="false") Dropdown
+                  ul.dropdown-menu.dropdown-menu-dark
+                    li
+                      a.dropdown-item(href="#") Action
+                    li
+                      hr.dropdown-divider
+              form.d-flex(role="search")
+                input.form-control.me-2(type="search", placeholder="Search", aria-label="Search")
+                button.btn.btn-success(type="submit") Search
+    section
+      div.container-lg.py-5 
+        block content

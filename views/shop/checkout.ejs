@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="../bootstrap/js/bootstrap.bundle.min.js" defer></script>
+</head>
+
+<%- include('../includes/navigation.ejs') %>
+<section>
+  <h1>Checkout Page</h1>
+
+  <ul class="list-group">
+    <% products.forEach(p=>{ %>
+      <li class="list-group-item d-flex justify-content-between align-items-end mb-2">
+        <div>
+          <h1>
+            <%= p.productId.title %>
+          </h1>
+          <h1>
+            Price : <%= p.productId.price %>INR
+          </h1>
+          <h1>Qty : <span class=""><%= p.quantity %></span></h1>
+        </div>
+      </li>
+    <% }); %>
+  </ul>
+  <h2>Total: <%= totalSum%>INR</h2>
+  <div>
+    <button class="btn btn-secondary" id="order-btn">Place Order</button>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      var stripe = Stripe('pk_test_51O3MURSHATdsPLfrUfi64PaJ5hCISzNQZZG8G4YbijPCH2agiq7lkd9H6SD63FA9S4rHr61fKzAcOnWpLpYA5vkS00v8x8JRi0');
+      var orderBtn = document.getElementById('order-btn');
+      orderBtn.addEventListener('click',()=>{
+        stripe.redirectToCheckout({
+          sessionId:'<%= sessionId %>'
+        });
+      });
+    </script>
+  </div>
+</section>
+
+<%- include('../includes/end.ejs') %>
